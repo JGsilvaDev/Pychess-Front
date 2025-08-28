@@ -24,6 +24,7 @@ export default function Me() {
     const [roboMode, setRoboMode] = useState(false);
 
     const API_URL = process.env.NEXT_PUBLIC_API_URL;
+    const API_URL_ROBO = process.env.NEXT_PUBLIC_API_ROBO;
 
     async function toggleRoboMode(ativo: boolean) {
         setIsSyncing(true);
@@ -79,7 +80,7 @@ export default function Me() {
         const fetchRoboMode = async () => {
             const token = localStorage.getItem('token');
             try {
-                const res = await fetch(`${API_URL}/get-robo-mode/`, {
+                const res = await fetch(`${API_URL_ROBO}/get-robo-mode/`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -124,7 +125,7 @@ export default function Me() {
                                     // Ativa via envio de token por e-mail
                                     setIsSyncing(true);
                                     try {
-                                        const res = await fetch(`${API_URL}/generate-robo-token/`, {
+                                        const res = await fetch(`${API_URL_ROBO}/generate-robo-token/`, {
                                             method: 'POST',
                                             headers: {
                                                 Authorization: `Bearer ${token}`,
@@ -191,7 +192,7 @@ export default function Me() {
                                     onClick={async () => {
                                         const token = localStorage.getItem('token');
                                         setIsSyncing(true);
-                                        const res = await fetch(`${API_URL}/validate-robo-token/`, {
+                                        const res = await fetch(`${API_URL_ROBO}/validate-robo-token/`, {
                                             method: 'POST',
                                             headers: {
                                                 'Content-Type': 'application/json',

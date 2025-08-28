@@ -25,6 +25,7 @@ export default function Game() {
     const [hasOngoingGame, setHasOngoingGame] = useState(false);
     const [loading, setLoading] = useState(true);
     const API_URL = process.env.NEXT_PUBLIC_API_URL;
+    const API_URL_ROBO = process.env.NEXT_PUBLIC_API_ROBO;
     const [lastGame, setLastGame] = useState<LastGame | null>(null);
     const [roboConectado, setRoboConectado] = useState(false);
 
@@ -50,7 +51,7 @@ export default function Game() {
                     setLastGame(data);
                 }
 
-                const roboRes = await fetch(`${API_URL}/get-robo-mode/`);
+                const roboRes = await fetch(`${API_URL_ROBO}/get-robo-mode/`);
                 if (roboRes.ok) {
                     const roboData = await roboRes.json();
                     setRoboConectado(roboData.robo_mode === true);
